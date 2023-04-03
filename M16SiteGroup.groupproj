@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{55C0C6D1-3337-485D-92DD-5999100E15C2}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="M16Site.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="M16SiteSA.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="M16Site">
+        <MSBuild Projects="M16Site.dproj"/>
+    </Target>
+    <Target Name="M16Site:Clean">
+        <MSBuild Projects="M16Site.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="M16Site:Make">
+        <MSBuild Projects="M16Site.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="M16SiteSA">
+        <MSBuild Projects="M16SiteSA.dproj"/>
+    </Target>
+    <Target Name="M16SiteSA:Clean">
+        <MSBuild Projects="M16SiteSA.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="M16SiteSA:Make">
+        <MSBuild Projects="M16SiteSA.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="M16Site;M16SiteSA"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="M16Site:Clean;M16SiteSA:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="M16Site:Make;M16SiteSA:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

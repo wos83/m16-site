@@ -1,11 +1,12 @@
 object IWServerController: TIWServerController
   OnCreate = IWServerControllerBaseCreate
-  AppName = 'MyApp'
-  Description = 'My IntraWeb Application'
-  DisplayName = 'IntraWeb Application'
+  AppName = 'M16Site'
+  ComInitialization = ciMultiThreaded
+  Description = 'Site da M16 Tech (IntraWeb)'
+  DisplayName = 'M16 Tech (Site)'
   Port = 8888
   Version = '15.2.69'
-  SessionOptions.SessionTimeout = 10
+  OnConfig = IWServerControllerBaseConfig
   OnNewSession = IWServerControllerBaseNewSession
   Height = 310
   Width = 342

@@ -9,7 +9,7 @@ uses
   UserSessionUnit in 'Source\Modules\UserSessionUnit.pas' {IWUserSession: TIWUserSessionBase},
   DatamoduleUnit in 'Source\Modules\DatamoduleUnit.pas' {DataModule1: TDataModule};
 
-{$R *.RES}
+{$R *.res}
 
 exports
   GetExtensionVersion,

@@ -4,7 +4,8 @@ interface
 
 uses
   Forms,
-  SysUtils, Classes;
+  SysUtils,
+  Classes;
 
 type
   TDataModule1 = class(TDataModule)
@@ -12,7 +13,6 @@ type
   public
   end;
 
-  
 implementation
 
 {$R *.dfm}
