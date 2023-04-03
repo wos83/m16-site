@@ -125,21 +125,18 @@ begin
   {$REGION 'BaseConfig'}
   {$IFDEF SA}
   Self.Port := 8888;
+  {$ELSE}
+  Self.Port := 80;
   {$ENDIF}
   Self.CharSet := 'utf-8';
 
   Self.LicenseTracking := False;
   Self.HistoryEnabled := False;
 
-  // Self.BackButtonOptions.Mode := TIWBackButtonMode.bmEnable;
-  // Self.BackButtonOptions.ShowMessage := True;
+  Self.BackButtonOptions.Mode := TIWBackButtonMode.bmEnable;
 
-  // Self.BackButtonOptions.Mode := TIWBackButtonMode.bmInterceptGlobal; //No User Back Button (Global)
-  // Self.BackButtonOptions.Mode := TIWBackButtonMode.bmDisableCompat; // No User Back Button
-  Self.BackButtonOptions.Mode := TIWBackButtonMode.bmEnable; // User Back Button
-
-  Self.CacheDir := TIWAppInfo.GetAppPath + 'Cache\';
-  Self.TemplateDir := TIWAppInfo.GetAppPath + 'Temp\';
+  // Self.CacheDir := TIWAppInfo.GetAppPath + 'Cache\';
+  // Self.TemplateDir := TIWAppInfo.GetAppPath + 'Temp\';
 
   Self.DebugHTML := True;
 
@@ -179,11 +176,7 @@ begin
   Self.SecurityOptions.CheckSameUA := False;
   Self.SecurityOptions.ShowSecurityErrorDetails := False;
   Self.SessionTimeout := 3600; // 60 minutes
-  // Self.SessionTimeout := 7200; // 120 minutes
-  // Self.SessionTimeout := 720; //12 minutes
-  // Self.SessionTimeout := 120; // 2 minutes
 
-  // THttpReply.DefaultCacheTTL := 1440; // 1440 minutes = 24 hours
   THttpReply.DefaultCacheTTL := 60; // 60 minutes = 1 hour
   THttpReply.DefaultCacheControl := 'private';
 
@@ -191,7 +184,7 @@ begin
   Self.IECompatibilityMode := 'IE=edge';
   Self.HttpKeepAlive := True;
   Self.PageTransitions := True;
-  Self.JavaScriptOptions.RenderjQuery := False;
+  Self.JavaScriptOptions.RenderjQuery := True;
 
   Self.SearchEngineOptions.RedirectToContentHandler := True;
   Self.SearchEngineOptions.ContentHandlerPath := 'SearchEngineRequest';

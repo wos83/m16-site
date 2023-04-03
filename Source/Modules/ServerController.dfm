@@ -1,7 +1,6 @@
 object IWServerController: TIWServerController
   OnCreate = IWServerControllerBaseCreate
   AppName = 'M16Site'
-  ComInitialization = ciMultiThreaded
   Description = 'Site da M16 Tech (IntraWeb)'
   DisplayName = 'M16 Tech (Site)'
   Port = 8888
