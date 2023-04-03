@@ -91,9 +91,8 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="Source\Views\Unit1.pas">
-            <Form>frmMain</Form>
-            <FormType>dfm</FormType>
+        <DCCReference Include="Source\Views\uFrmMain.pas">
+            <Form>FrmMain</Form>
             <DesignClass>TIWAppForm</DesignClass>
         </DCCReference>
         <DCCReference Include="Source\Modules\ServerController.pas">

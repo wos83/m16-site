@@ -50,7 +50,6 @@ type
     { Private declarations }
 
   public
-    procedure AfterConstruction; override;
     { Public declarations }
   end;
 
@@ -77,12 +76,6 @@ begin
 end;
 
 { TIWServerController }
-
-procedure TIWServerController.AfterConstruction;
-begin
-  inherited;
-  ComInitialization := ciMultiThreaded;
-end;
 
 procedure TIWServerController.IWServerControllerBaseNewSession(ASession: TIWApplication);
 begin
@@ -121,87 +114,89 @@ procedure TIWServerController.IWServerControllerBaseConfig(Sender: TObject);
 var
   FormHandler: TContentForm;
 begin
-  //
-  {$REGION 'BaseConfig'}
-  {$IFDEF SA}
-  Self.Port := 8888;
-  {$ELSE}
-  Self.Port := 80;
-  {$ENDIF}
-  Self.CharSet := 'utf-8';
+  (*
+    //
+    {$REGION 'BaseConfig'}
+    {$IFDEF SA}
+    Self.Port := 8888;
+    {$ELSE}
+    Self.Port := 80;
+    {$ENDIF}
+    Self.CharSet := 'utf-8';
 
-  Self.LicenseTracking := False;
-  Self.HistoryEnabled := False;
+    Self.LicenseTracking := False;
+    Self.HistoryEnabled := False;
 
-  Self.BackButtonOptions.Mode := TIWBackButtonMode.bmEnable;
+    Self.BackButtonOptions.Mode := TIWBackButtonMode.bmEnable;
 
-  // Self.CacheDir := TIWAppInfo.GetAppPath + 'Cache\';
-  // Self.TemplateDir := TIWAppInfo.GetAppPath + 'Temp\';
+    // Self.CacheDir := TIWAppInfo.GetAppPath + 'Cache\';
+    // Self.TemplateDir := TIWAppInfo.GetAppPath + 'Temp\';
 
-  Self.DebugHTML := True;
+    Self.DebugHTML := True;
 
-  Self.Log := TLogOptions.loFile;
-  Self.LogCommandEnabled := True;
-  Self.LogSessionEvents := True;
+    Self.Log := TLogOptions.loFile;
+    Self.LogCommandEnabled := True;
+    Self.LogSessionEvents := True;
 
-  Self.ExceptionLogger.LogType := TLogType.ltFile;
-  Self.ExceptionLogger.FilePath := TIWAppInfo.GetAppPath + 'Error\';
-  Self.ExceptionLogger.FileName := 'Error';
-  Self.ExceptionLogger.PurgeAfterDays := 365;
-  Self.ExceptionLogger.HtmlReportInfos := //
-     [TReportInfo.riAppInfo, TReportInfo.riExceptionInfo, TReportInfo.riAppInfo //
-     , TReportInfo.riIWAppInfo, TReportInfo.riStackTrace, TReportInfo.riRequestInfo];
-  Self.ExceptionLogger.ReportInfos := //
-     [TReportInfo.riAppInfo, TReportInfo.riExceptionInfo, TReportInfo.riAppInfo //
-     , TReportInfo.riIWAppInfo, TReportInfo.riStackTrace, TReportInfo.riRequestInfo];
-  Self.ExceptionLogger.Enabled := True;
+    Self.ExceptionLogger.LogType := TLogType.ltFile;
+    Self.ExceptionLogger.FilePath := TIWAppInfo.GetAppPath + 'Error\';
+    Self.ExceptionLogger.FileName := 'Error';
+    Self.ExceptionLogger.PurgeAfterDays := 365;
+    Self.ExceptionLogger.HtmlReportInfos := //
+    [TReportInfo.riAppInfo, TReportInfo.riExceptionInfo, TReportInfo.riAppInfo //
+    , TReportInfo.riIWAppInfo, TReportInfo.riStackTrace, TReportInfo.riRequestInfo];
+    Self.ExceptionLogger.ReportInfos := //
+    [TReportInfo.riAppInfo, TReportInfo.riExceptionInfo, TReportInfo.riAppInfo //
+    , TReportInfo.riIWAppInfo, TReportInfo.riStackTrace, TReportInfo.riRequestInfo];
+    Self.ExceptionLogger.Enabled := True;
 
-  Self.Compression.AllowDeflate := True;
-  Self.Compression.AllowGZip := True;
-  Self.Compression.Level := 6;
-  Self.Compression.MinSize := 512;
-  Self.Compression.PreCompress := True;
-  Self.Compression.Enabled := True;
+    Self.Compression.AllowDeflate := True;
+    Self.Compression.AllowGZip := True;
+    Self.Compression.Level := 6;
+    Self.Compression.MinSize := 512;
+    Self.Compression.PreCompress := True;
+    Self.Compression.Enabled := True;
 
-  Self.CookieOptions.CookieNameSuffix := EmptyStr;
-  Self.CookieOptions.HttpOnly := False;
-  Self.CookieOptions.Secure := False;
-  Self.CookieOptions.SessionCookies := True;
-  Self.CookieOptions.UseCookies := True;
+    Self.CookieOptions.CookieNameSuffix := EmptyStr;
+    Self.CookieOptions.HttpOnly := False;
+    Self.CookieOptions.Secure := False;
+    Self.CookieOptions.SessionCookies := True;
+    Self.CookieOptions.UseCookies := True;
 
-  Self.AllowMultipleSessionsPerUser := False;
-  Self.AuthBeforeNewSession := False;
-  Self.RestartExpiredSession := True;
-  Self.SecurityOptions.CheckSameIP := False;
-  Self.SecurityOptions.CheckSameUA := False;
-  Self.SecurityOptions.ShowSecurityErrorDetails := False;
-  Self.SessionTimeout := 3600; // 60 minutes
+    Self.AllowMultipleSessionsPerUser := False;
+    Self.AuthBeforeNewSession := False;
+    Self.RestartExpiredSession := True;
+    Self.SecurityOptions.CheckSameIP := False;
+    Self.SecurityOptions.CheckSameUA := False;
+    Self.SecurityOptions.ShowSecurityErrorDetails := False;
+    Self.SessionTimeout := 3600; // 60 minutes
 
-  THttpReply.DefaultCacheTTL := 60; // 60 minutes = 1 hour
-  THttpReply.DefaultCacheControl := 'private';
+    THttpReply.DefaultCacheTTL := 60; // 60 minutes = 1 hour
+    THttpReply.DefaultCacheControl := 'private';
 
-  Self.ShowStartParams := False;
-  Self.IECompatibilityMode := 'IE=edge';
-  Self.HttpKeepAlive := True;
-  Self.PageTransitions := True;
-  Self.JavaScriptOptions.RenderjQuery := True;
+    Self.ShowStartParams := False;
+    Self.IECompatibilityMode := 'IE=edge';
+    Self.HttpKeepAlive := True;
+    Self.PageTransitions := True;
+    Self.JavaScriptOptions.RenderjQuery := True;
 
-  Self.SearchEngineOptions.RedirectToContentHandler := True;
-  Self.SearchEngineOptions.ContentHandlerPath := 'SearchEngineRequest';
+    Self.SearchEngineOptions.RedirectToContentHandler := True;
+    Self.SearchEngineOptions.ContentHandlerPath := 'SearchEngineRequest';
 
-  {$ENDREGION}
-  //
-  {$REGION 'Default Pages'}
-  // THandlers.Add(EmptyStr, 'IWError.html', TContentForm.Create(TFrmError));
-  // THandlers.Add(EmptyStr, '404.html', TContentForm.Create(TFrm404));
-  // THandlers.Add(EmptyStr, '500.html', TContentForm.Create(TFrm500));
-  {$ENDREGION}
-  //
+    {$ENDREGION}
+    //
+    {$REGION 'Default Pages'}
+    // THandlers.Add(EmptyStr, 'IWError.html', TContentForm.Create(TFrmError));
+    // THandlers.Add(EmptyStr, '404.html', TContentForm.Create(TFrm404));
+    // THandlers.Add(EmptyStr, '500.html', TContentForm.Create(TFrm500));
+    {$ENDREGION}
+    //
 
-  FormHandler := TContentForm.Create(TFrmMain);
-  FormHandler.CanStartSession := True;
-  FormHandler.RequiresSessionStart := True;
-  THandlers.AddRootHandler(EmptyStr, 'index.html', FormHandler);
+    FormHandler := TContentForm.Create(TFrmMain);
+    FormHandler.CanStartSession := True;
+    FormHandler.RequiresSessionStart := True;
+    THandlers.AddRootHandler(EmptyStr, 'index.html', FormHandler);
+  *)
 end;
 
 initialization
